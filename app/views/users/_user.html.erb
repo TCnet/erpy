@@ -1,0 +1,16 @@
+<li>
+  <%= gravatar_for user, size: 50 %>
+  <% if !user.activated %>
+    <%= link_to user.name, user, {class: "grey"} %>
+  <% else %>
+    <%= link_to user.name, user %>
+  <% end %>
+
+  <% if current_user.admin? && !current_user?(user) %>
+    |
+    <%= link_to "delete", user, method: :delete, data: {
+      turbo_method: :delete,
+      turbo_confirm: "Are you sure?"} %>
+  <% end %>
+
+</li>

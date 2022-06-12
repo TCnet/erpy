@@ -1,0 +1,27 @@
+<tr>
+  <td>
+    <%= check_box_tag "photo_ids[]", photo.id  %>
+  </td>
+  <td>
+  <%= image_tag photo.picture.variant(:thumb)  if photo.picture.attached? %>
+
+  </td>
+  <td>
+<%= photo.name %>
+  </td>
+   <td >
+ <span>
+  <input id="photo_<%=photo.id%>" type=text value=<%= geturl url_for(photo.picture) if photo.picture? %> />
+
+  </span>
+   </td>
+  <td>
+    <button id="bt_<%=photo.id%>" onClick="CopyURL('photo_<%=photo.id%>');return false;" >Copy</button>
+
+    </td>
+    <td>
+<%= link_to "Dowload",url_for(photo.picture),target: "_blank"%>
+<%= button_to "Destroy", photo, method: :delete, onclick: "return confirmDestroy('Are you sure want destroy this post?')" %>
+    </td>
+
+</tr>

@@ -1,0 +1,107 @@
+<% provide(:title, "Show album") %>
+
+  <div class="row">
+    <aside class="col-md-3 albums_menu">
+      <%= render 'shared/album_menu' %>
+    </aside>
+    <div class="col-md-9">
+      <%= render 'search' %>
+      <section class="album_info">
+        <span id="album_img">
+          <%= image_tag @album.coverimg,width:"120",height: "120"%>
+        </span>
+        <span><%=@album.name%></span>
+        <% @herf.each do |f|%>
+          <span><%= link_to f,f,target:"_blank" %></span>
+        <% end %>
+
+        <span><%= link_to "edit",edit_album_path(@album) %>
+          |
+          <%= link_to "delete", album_path(@album), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+        </span>
+      </section>
+      <div>
+        <%=render 'shared/upload_form'%>
+      </div>
+      <div>
+        <%= form_with model: @album, url: download_albums_url(@album),class: "row g-2", method: :post do |f| %>
+
+        <%= f.hidden_field :id, value: @album.id%>
+        <%= f.text_field :csize, class: 'form-control', placeholder: "size e.g;s m l xl" %>
+        <%= f.text_field :ussize, class: 'form-control', placeholder: "usszie e.g;:8 10 12 14" %>
+
+        <%= f.text_area :asize, class: 'form-control' ,rows: 4,placeholder: "asia_size append to ussize; use | or Enter to separate"%>
+        <%= f.text_field :brand, class: 'form-control', placeholder: "brand e.g;:Xudom" %>
+        <%= f.text_field :fullname, class: 'form-control', placeholder: "fullname e.g;:Stripped T-shirts for women" %>
+        <%= f.text_field :price, class: 'form-control',placeholder: "prices use | or Enter to separate,standard|list|sale price" %>
+        <%= f.text_area :stock, class: 'form-control',rows: 6,placeholder: "stock use | or Enter to separate please sort alphabetically of pic name" %>
+        <%= f.text_area :points, class: 'form-control',rows: 4,placeholder: "bullet_points use | or Enter to separate" %>
+        <%= f.text_area :keywords, class: 'form-control',rows: 4,placeholder: "keywords" %>
+        <%= f.text_area :dname, class: 'form-control',rows: 4, placeholder: "introduction befor size e.g;:Stripped T-shirts" %>
+        <%= f.text_field "is_in",value:"cm", class: 'form-control', placeholder: "cm or in. The unit for you write size on the descrition" %>
+
+        <%= f.text_area :description, class: 'form-control',rows: 4,placeholder: "description size e.g;bust waist|70 78 can use enter instead | to separate " %>
+
+        <%= f.text_area :dnote, class: 'form-control',rows: 4,placeholder: "description size e.g;bust waist|70 78" %>
+
+        <div class="">
+          <%= f.submit "export", :class => "btn btn-large btn-primary" %>
+        </div>
+
+      <% end %>
+
+    </div>
+    <div class="photo_list py-2">
+      <%= form_tag destroy_multiple_photos_path, method: :delete do %>
+
+      <div class="check ">
+        <input type="checkbox" onclick="toggle_checkall('photo', this.checked);"/>Select All
+      </div>
+      <ul id="phtot_list"></ul>
+      <table class="table">
+        <%= render @album.photos%>
+      </table>
+      <%= submit_tag "删除选中" %>
+    <% end %>
+  </div>
+
+  <div class="photo_url">
+
+    <textarea class="form-control mb-2"
+     id="photo_url" style="height: 100px">
+    <%= @photourls %>
+  </textarea>
+    <p>
+      <button id="bt_photo_url" type="button" onclick="CopyURL('photo_url');">Copy</button>
+    </p>
+    <div></div>
+
+  </div>
+
+  <script type="text/javascript">
+
+    function CopyURL(obj) {
+      var url = $("#" + obj);
+      url.select();
+      document.execCommand("Copy"); // 执行浏览器复制命令
+      alert("Copy successful！Please paste it!");
+
+    }
+  </script>
+  <script>
+    function toggle_checkall(field_name, state) {
+      var checkboxes = document.getElementsByTagName('input');
+      var count = checkboxes.length;
+      for (var i = 0; i < count; i++) {
+        if (checkboxes[i].type == "checkbox" && checkboxes[i].name == field_name + "_ids[]") {
+          checkboxes[i].checked = state;
+        }
+      }
+    }
+
+    function confirmDestroy(message) {
+      if (!confirm(message)) {
+        return false;
+      }
+    }
+  </script>

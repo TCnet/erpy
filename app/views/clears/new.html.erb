@@ -1,0 +1,17 @@
+<% provide(:title, "Clear words") %>
+  <h1>Clear repaly keywords</h1>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-md-6">
+      <%= form_for(:clear, url: clearw_path,html: {class: "row g-2"}) do |f| %>
+
+      <%= f.label :numcm %>
+      <%= f.text_field :numcm, class: 'form-control' %>
+      <%= f.text_area :keywords, class: 'form-control',rows: 4,placeholder: "keywords " %>
+
+      <%= f.submit "Sub", class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+  <div class="col"></div>
+</div>

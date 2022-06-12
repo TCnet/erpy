@@ -1,0 +1,10 @@
+<div class="row albums_search border rounded">
+  <ul>
+    <% @category.each do |f|%>
+      <li>
+
+        <%= link_to f,kwords_path(:q => f) %>
+      </li>
+    <% end %>
+  </ul>
+</div>

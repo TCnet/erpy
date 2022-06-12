@@ -1,0 +1,16 @@
+<div id="album-<%= album.id%>" class="album_item center col-sm-2">
+ <div>
+  <%= check_box_tag "album_ids[]", album.id %>
+  
+</div>
+  <%= link_to (image_tag album.coverimg, alt: album.name,class: "img-thumbnail rounded img-fluid"),album %>
+  <span style="display:block"><%= album.name %></span>
+
+<div class="">
+    <%= link_to "edit",edit_album_path(album) %>
+    |
+    <%= link_to "delete", album_path(album),
+    data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+  </div>
+
+</div>

@@ -1,0 +1,52 @@
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-3">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+      <section class="stats">
+        <%= render 'shared/stats' %>
+      </section>
+      <section class="micropost_form">
+        <%= render 'shared/micropost_form' %>
+      </section>
+    </aside>
+    <div class="col-auto">
+      <h3>Micropost Feed</h3>
+      <%= render 'shared/feed' %>
+    </div>
+
+  </div>
+<% else %>
+
+  <div class="row center jumbotron">
+    <h1>Welcome to the ERP of Yimulli</h1>
+    <h2>
+      This is the home page for the
+      <a href="http://www.zideep.com/">Zideep</a>
+      web solution.
+    </h2>
+
+  </div>
+  <div class="center my-2">
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-md btn-primary" %>
+  </div>
+
+ <div class="center my-4">
+
+   <%= link_to image_tag("logo.png", alt: "ZIDEEP"), 'http://www.zideep.com/',target: "_blank" %>
+   <%= link_to image_tag("rails.png", alt: "Rails logo"), 'http://rubyonrails.org/',target: "_blank" %>
+
+ </div>
+
+  <div class=" user_list">
+    <ul class="">
+      <% @users.each do |user| %>
+        <li>
+          <%= link_to gravatar_for(user, size: 50), user %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+<% end %>

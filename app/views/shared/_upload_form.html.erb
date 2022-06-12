@@ -1,0 +1,33 @@
+<%= render 'shared/qq-template'%>
+ <div id="fine-uploader" >
+ </div>
+ <input type="hidden" value="<%=params[:id]%>" id="hdalbumid"/>
+<script>
+  var uploader = new qq.FineUploader({
+    debug:true,
+    element: document.getElementById('fine-uploader'),
+    request: {
+      endpoint: '/upload',
+      customHeaders: {
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+      },
+      params: {'album_id':$('#hdalbumid').val()
+      }
+
+    },
+      validation:{
+        allowedExtensions: ['jpeg', 'jpg', 'gif', 'png'],sizeLimit: 1024*1000
+    },
+
+    deleteFile: {
+      enabled: false,
+      endpoint: '/delete_uploads'},
+
+    retry: { enableAuto: true}
+
+
+
+
+
+    });
+</script>

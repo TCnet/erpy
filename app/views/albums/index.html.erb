@@ -1,0 +1,47 @@
+<% provide(:title, 'My albums') %>
+
+  <div class="row">
+    <aside class="col-md-3 albums_menu">
+      <%= render 'shared/album_menu' %>
+    </aside>
+    <div class="col-md-9">
+
+      <%= render 'search' %>
+    
+      <div class="row albums">
+
+        <%= form_with url: outexcel_albums_url(@albums), method: :post do |form| %>
+        <div class="row">
+          <div class="col-auto">
+            <input type="checkbox" onclick="toggle_checkall('album', this.checked);"/>
+            <label for="" class="form-check-label">全选</label>
+
+          </div>
+
+          <div class="col-auto">
+              <%= submit_tag "Export",:class => "btn btn-sm btn-primary" %>
+          </div>
+          <hr class="my-2"></hr>
+
+        </div>
+        <div class="row">
+        <%= render @albums %>
+        </div>
+      <% end %>
+    </div>
+    <%= will_paginate %>
+    <script>
+      function toggle_checkall(field_name, state) {
+        var checkboxes = document.getElementsByTagName('input');
+        var count = checkboxes.length;
+        for (var i = 0; i < count; i++) {
+          if (checkboxes[i].type == "checkbox" && checkboxes[i].name == field_name + "_ids[]") {
+            checkboxes[i].checked = state;
+          }
+        }
+      }
+    </script>
+
+  </div>
+
+</div>

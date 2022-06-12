@@ -1,0 +1,44 @@
+<% provide(:title, '仓库列表') %>
+
+  <div class="row">
+    <aside class="col-md-3 albums_menu">
+      <%= render 'shared/xstock_menu' %>
+    </aside>
+    <div class="col-md-9">
+      <div class="row ">
+        <h5>
+          仓库列表</h5>
+        <table class="table">
+          <th>名称</th>
+          <th>地址</th>
+          <th>当前库存</th>
+          <th>操作</th>
+
+          <% @warehouses.each do |ob| %>
+            <tr>
+              <td>
+                <%= ob.name %>
+              </td>
+              <td>
+                <%= ob.address %>
+              </td>
+              <td>
+                <%= raw ob.is_current ? '<span class="glyphicon glyphicon-ok "></span>' :'<span class="glyphicon glyphicon-remove "></span>'%>
+              </td>
+
+              <td>
+                <%= link_to "edit",edit_warehouse_path(ob) %>
+                |
+                <%= link_to "delete", ob, method: :delete, data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "Are you sure?"} %>
+                </td>
+
+            <% end %>
+
+          </table>
+        </div>
+
+      </div>
+
+    </div>
