@@ -7,7 +7,7 @@ ruby "3.0.3"
 gem "rails", "~> 7.0.3"
 gem 'bootstrap', '~> 5.1.3'
 gem 'jquery-rails'
-gem 'bcrypt', '3.1.11'
+gem 'bcrypt', '3.1.15'
 gem 'will_paginate', '~> 3.3'
 
 
