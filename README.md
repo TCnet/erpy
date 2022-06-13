@@ -22,3 +22,4 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+http://www.talkingquickly.co.uk/deploying-rails-to-a-vps-with-capistrano-v3-and-systemd
