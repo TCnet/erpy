@@ -32,7 +32,7 @@ set :puma_enable_lingering, true
 set :keep_releases, 5
 
 # Directories that should be linked to the shared folder
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', ‘storage’, 'public/system', 'public/uploads'
 append :linked_files, 'config/database.yml', 'config/master.key'
 
 # this:
