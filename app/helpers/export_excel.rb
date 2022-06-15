@@ -66,6 +66,7 @@ module ExportExcel
       brandname = brand
       dnote = album.dnote
       dname = album.dname
+      fabric_type = album.fabric_type
       fullname = album.fullname
       csize = album.csize.upcase.split(' ')
       ussize = to_us_size_for album.ussize,csize,"Tag Size "
@@ -350,6 +351,9 @@ module ExportExcel
         if(t_ob=="condition_type")
          # sheet1[1+c_cloum,t_num] =  "New"
           sheet1[num+c_cloum,t_num] = "New"
+        end
+        if(t_ob=="fabric_type")
+          sheet1[num+c_cloum,t_num] = fabric_type
         end
 
 

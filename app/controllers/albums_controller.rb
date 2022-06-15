@@ -168,7 +168,7 @@ class AlbumsController < ApplicationController
   private
 
     def album_params
-      params.require(:album).permit(:name, :summary,:csize,:ussize,:brand,:fullname,:dname,:description,:dnote,:keywords,:points,:price,:stock,:asize)
+      params.require(:album).permit(:name, :summary,:csize,:ussize,:brand,:fullname,:fabric_type,:dname,:description,:dnote,:keywords,:points,:price,:stock,:asize)
     end
 
     # def correct_album
