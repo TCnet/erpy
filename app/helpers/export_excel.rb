@@ -49,8 +49,12 @@ module ExportExcel
       sql2 ="name not LIKE ?"
       mainphotos = photos.where(sql,"%01.jpg%")
       otherphotos = photos.where(sql2,"%01.jpg%")
-      waistsize = description_waist_size_for album.description
+      #waistsize = description_waist_size_for album.description
       amatwihtas= album.amatwithas
+      inseam = description_other_size_for "inseam",album.description
+      waistsize = description_other_size_for "waist",album.description
+      rise_height =description_other_size_for "rise_height",album.description
+      leg_diameter = description_other_size_for "leg_diameter",album.description
 
 
 
@@ -272,7 +276,37 @@ module ExportExcel
              sheet1[num+c_cloum,t_num] = "CM"
           end
         end
-        
+
+        if(t_ob =="inseam_length_unit_of_measure"&& !inseam.empty?)
+         if(is_in)
+            #sheet1[1+c_cloum,t_num] = ""
+            sheet1[num+c_cloum,t_num] = "IN"
+         else
+            #sheet1[1+c_cloum,t_num] = "Regular"
+            sheet1[num+c_cloum,t_num] = "CM"
+         end
+       end
+
+       if(t_ob =="rise_height_unit_of_measure"&& !rise_height.empty?)
+        if(is_in)
+           #sheet1[1+c_cloum,t_num] = ""
+           sheet1[num+c_cloum,t_num] = "IN"
+        else
+           #sheet1[1+c_cloum,t_num] = "Regular"
+           sheet1[num+c_cloum,t_num] = "CM"
+        end
+      end
+
+      if(t_ob =="leg_diameter_unit_of_measure"&& !leg_diameter.empty?)
+       if(is_in)
+          #sheet1[1+c_cloum,t_num] = ""
+          sheet1[num+c_cloum,t_num] = "IN"
+       else
+          #sheet1[1+c_cloum,t_num] = "Regular"
+          sheet1[num+c_cloum,t_num] = "CM"
+       end
+     end
+
        #export amatwithas
         amatwihtas.each_with_index do |ata,atanum|
           if(t_ob ==ata.amatemp.name)
@@ -611,7 +645,7 @@ module ExportExcel
 
     end
 
-#设置腰围属性
+#设置腰围属性 inseam rise_height 等 2022
 
   if(t_ob=="waist_size"&& !waistsize.empty?)
     wastr = waistsize.split(',')
@@ -626,6 +660,49 @@ module ExportExcel
 
     end
 
+  end
+
+  if(t_ob=="inseam_length"&& !inseam.empty?)
+    wastr = inseam.split(',')
+     j=1
+    code.each do |b|
+       m=t_num
+       csize.each_with_index do |c,index|
+        sheet1[j+index+1+c_cloum,m] = wastr[index]
+       end
+
+      j +=csize.length
+
+    end
+
+  end
+
+  if(t_ob=="rise_height"&& !rise_height.empty?)
+    wastr = rise_height.split(',')
+     j=1
+    code.each do |b|
+       m=t_num
+       csize.each_with_index do |c,index|
+        sheet1[j+index+1+c_cloum,m] = wastr[index]
+       end
+
+      j +=csize.length
+
+    end
+  end
+
+  if(t_ob=="leg_diameter"&& !leg_diameter.empty?)
+    wastr = leg_diameter.split(',')
+     j=1
+    code.each do |b|
+       m=t_num
+       csize.each_with_index do |c,index|
+        sheet1[j+index+1+c_cloum,m] = wastr[index]
+       end
+
+      j +=csize.length
+
+    end
   end
 
 #end 设置腰围属性

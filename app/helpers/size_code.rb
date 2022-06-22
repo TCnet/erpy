@@ -33,7 +33,7 @@ module SizeCode
       "Large"
     else
       "Unknown"
-    end 
+    end
   end
   #end size map
 
@@ -42,13 +42,13 @@ module SizeCode
     result=size
     ob = usszie.split(' ')
     asize = asize.nil?? " " : asize
-    asize_arry = asize.tr("\n\r","|").split('|') 
-    if !usszie.empty? 
+    asize_arry = asize.tr("\n\r","|").split('|')
+    if !usszie.empty?
       if( ob[n].upcase =~ /[A-Z]$/ )
-       
+
         result = ob[n].upcase
         return result
-        
+
       else
         result = ob[n].tr("/","-")
         return result
@@ -66,13 +66,13 @@ module SizeCode
     result=size
     ob = usszie.split(' ')
     asize = asize.nil?? " " : asize
-    asize_arry = asize.tr("\n\r","|").split('|') 
-    if !usszie.empty? 
+    asize_arry = asize.tr("\n\r","|").split('|')
+    if !usszie.empty?
       if( ob[n].upcase =~ /[A-Z]$/ )
-       
+
         result = !asize_arry[n].nil?? ob[n].upcase+" "+asize_arry[n] : ob[n].upcase
         return result
-        
+
       else
         result = !asize_arry[n].nil?? "US"+separate+ob[n]+" "+asize_arry[n] : "US"+separate+ob[n]
         return result
@@ -87,7 +87,7 @@ module SizeCode
 
  #美国尺码更改为数字码
   def to_us_size_for(ussize,csize,str)
-    ob=ussize 
+    ob=ussize
     if !ussize.empty?
       #ob = ussize.split(' ').each_with_index.map {|s,j| s="US "+s+"("+str+csize[j]+")"}
       ob = ussize.split(' ').each_with_index.map {|s,j| s= s.tr("/","-") }
@@ -95,19 +95,19 @@ module SizeCode
       ob = csize
     end
     return ob
-    
+
   end
 
   #美国尺码更改为数字码
   def to_us_sizenew_for(ussize,csize)
-    ob=ussize 
+    ob=ussize
     if !ussize.empty?
       ob = ussize.split(' ').each_with_index.map {|s,j| s= s.tr("/","-") }
     else
       ob = csize
     end
     return ob
-    
+
   end
 
   def to_in(cm,is_in)
@@ -125,50 +125,51 @@ module SizeCode
       if e<str.length-1
         result += "-"
       end
-      
+
     end
     return result
   end
 
-  #提起详细描述里的腰围尺码
-
-  def description_waist_size_for(desize,is_in=false)
-   #set size for description
-     destr=""
-     waist_px = 0
-     if !desize.empty?
-       dearray = twoarray_for desize
-       dellen = dearray[0].length
-        dellen.times do |e|
-          if(dearray[0][e].upcase=="WAIST")
-            waist_px=e
-            break
-          end
-        end
-        dstr =  dearray[waist_px+1]
-        if(!dstr.empty?)
-          #wastr= dstr.split(' ')
-          dstr.each_with_index do |f, num|
-            thewaist = f.split('-')
-            destr+= thewaist[0]
-            #destr+= to_in(thewaist[0],is_in)
-            if(num<dstr.length-1)
-              destr+=","
+  #提起inseam waist 等 数据
+      def description_other_size_for(typename,desize,is_in=false)
+       #set size for description
+         destr=""
+         waist_px = 0
+         if !desize.empty?
+           dearray = twoarray_for desize
+           dellen = dearray[0].length
+            dellen.times do |e|
+              if(dearray[0][e].upcase==typename.upcase)
+                waist_px=e
+                break
+              end
             end
-          end
-        end
+            dstr =  dearray[waist_px+1]
+            if(!dstr.empty?)
+              #wastr= dstr.split(' ')
+              dstr.each_with_index do |f, num|
+                thewaist = f.split('-')
+                destr+= thewaist[0]
+                #destr+= to_in(thewaist[0],is_in)
+                if(num<dstr.length-1)
+                  destr+=","
+                end
+              end
+            end
 
-     end
-     return destr
+         end
+         return destr
+      end
 
-  end
+
+
+  #提起详细描述里的腰围尺码
 
 
 # 详细描述的尺码
   def description_size_for(desize,csize,is_in=false)
     #set size for description
     destr=""
-    
     if !desize.empty?
       dearray = twoarray_for desize
       csizelen = csize.length
@@ -177,16 +178,16 @@ module SizeCode
         destr +=": "
 
         dellen = dearray[0].length
-        
+
         dellen.times do |e|
-          
+
           destr += dearray[0][e]
           destr +=" "
           dearray.length.times do |c|
             if c > 0&& c-1==e
-              
+
               destr += to_in(dearray[c][num],is_in)
-              
+
             end
           end
           if e==dellen-1
@@ -194,27 +195,27 @@ module SizeCode
           else
             destr +=","
           end
-          
+
         end
-        
-        
+
+
         destr+="<br>"
         destr +="\n"
-        
-      end    
-      
+
+      end
+
     end
 
     return destr
-    
+
   end
   #end dericript size
-  
 
-  
 
-  
 
-  
-  
+
+
+
+
+
 end
