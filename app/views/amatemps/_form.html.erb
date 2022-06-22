@@ -1,0 +1,23 @@
+<%= form_with model: @amatemp,class: "row g-2" do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+
+<div class="">
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control' %>
+</div>
+<div class="">
+  <%= f.label :value %>
+  <%= f.text_area :value, class: 'form-control',rows: 6,placeholder: "titles use | or Enter to separate" %>
+</div>
+
+<div class="">
+  <%= f.check_box :isused ,class: "form-check-input"%>
+  <%= f.label :isused ,class: "form-check-label"%>
+
+</div>
+<br/>
+<div class="col-auto">
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+</div>
+
+<% end %>

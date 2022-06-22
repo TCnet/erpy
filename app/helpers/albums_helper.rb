@@ -168,5 +168,13 @@ module AlbumsHelper
 
   end
 
+# get amatempwith value
+  def getamavalue(amatemp,album)
+    amawith = album.amatwithas.where('amatemp_id=?',amatemp.id)
+    if(amawith.count>0)
+      amawith.first.value
+    end
+  end
+
 
 end

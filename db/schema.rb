@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_15_102223) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_21_095542) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -61,6 +61,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_15_102223) do
     t.string "fabric_type"
     t.index ["user_id", "created_at"], name: "index_albums_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_albums_on_user_id"
+  end
+
+  create_table "amatemps", force: :cascade do |t|
+    t.string "name"
+    t.text "value"
+    t.boolean "isused"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_amatemps_on_user_id"
+  end
+
+  create_table "amatwithas", force: :cascade do |t|
+    t.string "value"
+    t.integer "album_id", null: false
+    t.integer "amatemp_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_amatwithas_on_album_id"
+    t.index ["amatemp_id"], name: "index_amatwithas_on_amatemp_id"
   end
 
   create_table "etemplates", force: :cascade do |t|
@@ -233,6 +253,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_15_102223) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "albums", "users"
+  add_foreign_key "amatemps", "users"
+  add_foreign_key "amatwithas", "albums"
+  add_foreign_key "amatwithas", "amatemps"
   add_foreign_key "etemplates", "users"
   add_foreign_key "inoutplans", "users"
   add_foreign_key "inoutplans", "warehouses"

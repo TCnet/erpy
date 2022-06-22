@@ -1,9 +1,17 @@
-<h4 class=""><i class="fa fa-th"></i> 模版设置</h4>
+<h4 class="">
+  <i class="fa fa-th"></i>
+  模版设置</h4>
 <ul class="nav flex-column">
   <li class="nav-item">
     <%= link_to "新建模版",new_etemplate_path, class: "nav-link"%>
   </li>
   <li class="nav-item">
     <%= link_to "我的模版",etemplates_path, class: "nav-link"%>
+  </li>
+  <li class="nav-item">
+    <%= link_to "新建表格属性",new_amatemp_path, class: "nav-link"%>
+  </li>
+  <li class="nav-item">
+    <%= link_to "管理表格属性",amatemps_path, class: "nav-link"%>
   </li>
 </ul>

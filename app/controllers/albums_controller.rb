@@ -23,6 +23,7 @@ class AlbumsController < ApplicationController
 
 
   def new
+    @amatemps = user_amatemps
     @album = Album.new
     if !@album.brand?
       @album.brand = current_user.brand
@@ -32,14 +33,13 @@ class AlbumsController < ApplicationController
     end
   end
 
-  def update
 
-  end
 
   def exportexcel
 
     @album = Album.find(params["album"][:id])
     @album.update(album_params)
+    add_amatwitha @album
     @etemplate = get_template current_user
     #title_arry = @etemplate.title.split(' ')
     path= File.join Rails.root, 'public/'
@@ -59,6 +59,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
+    @amatemps = user_amatemps
     @category = category_for current_user.albums
 
    # @in_select={"Yes"=>true,"No"=>false}
@@ -122,21 +123,54 @@ class AlbumsController < ApplicationController
     exportexcel
   end
 
+#add add_amatwitha
+ def add_amatwitha album
+   user_amatemps.each do |ama|
+     value = params.require(:amatemp)[ama.name]
+     amatempwith= album.amatwithas.where("amatemp_id =? ",ama.id)
+     if(amatempwith.count>0)
+       amatempwith= amatempwith.first
+     else
+       amatempwith = Amatwitha.new(value: value)
+     end
+     amatempwith.album= album
+     amatempwith.amatemp = ama
+     amatempwith.value = value
+     amatempwith.save
+   end
+ end
 
 
   def create
     @album = current_user.albums.build(album_params)
     @album.coverimg = "nopic.jpg"
     if @album.save
-      flash[:success] = "Album created!"
-      redirect_to albums_path
+      add_amatwitha @album
+        # s+= params.require(:amatemp)[ama.name]
+        # s+=","
+        # if s
+        flash[:success] = "Album created!"
+        redirect_to albums_path
+        #
+      else
+        render :new, status: :unprocessable_entity
+      end
 
-    else
-      render :new, status: :unprocessable_entity
-    end
+
+
+    # @album = current_user.albums.build(album_params)
+    # @album.coverimg = "nopic.jpg"
+    # if @album.save
+    #   flash[:success] = "Album created!"
+    #   redirect_to albums_path
+    #
+    # else
+    #   render :new, status: :unprocessable_entity
+    # end
   end
 
   def edit
+    @amatemps=user_amatemps
     @album = Album.find(params[:id])
     if !@album.brand?
       @album.brand = current_user.brand
@@ -157,6 +191,7 @@ class AlbumsController < ApplicationController
   def update
     @album = Album.find(params[:id])
     if @album.update(album_params)
+      add_amatwitha @album
       flash[:success] = "Album updated"
       redirect_to albums_path
     else
@@ -165,10 +200,17 @@ class AlbumsController < ApplicationController
 
   end
 
+
+
+
   private
 
     def album_params
       params.require(:album).permit(:name, :summary,:csize,:ussize,:brand,:fullname,:fabric_type,:dname,:description,:dnote,:keywords,:points,:price,:stock,:asize)
+    end
+
+    def user_amatemps
+      current_user.amatemps.where("isused")
     end
 
     # def correct_album

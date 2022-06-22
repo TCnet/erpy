@@ -41,9 +41,21 @@
         <%= f.text_field "is_in",value:"cm", class: 'form-control', placeholder: "cm or in. The unit for you write size on the descrition" %>
 
         <%= f.text_area :description, class: 'form-control',rows: 4,placeholder: "description size e.g;bust waist|70 78 can use enter instead | to separate " %>
-
-        <%= f.text_area :dnote, class: 'form-control',rows: 4,placeholder: "description size e.g;bust waist|70 78" %>
-
+        <%= f.text_area :dnote, class: 'form-control',rows: 4,placeholder: "Note" %>
+        <div class="row my-2 ">
+          <% @amatemps.each_with_index do |amatemp,num|%>
+            <% if(num%4==0) %>
+            </div>
+            <div class="row my-2 ">
+            <%end%>
+            <div class="col-3">
+              <%= label_tag amatemp.name %>
+              <% amatemp_array = amatemp.value.tr(' ',"|").split('|').map { |valu| [valu, valu] } %>
+                <% amatemp_array=  amatemp_array.insert(0,["请选择"," "]) %>
+                  <%= select_tag("amatemp["+amatemp.name+"]", options_for_select(amatemp_array,getamavalue(amatemp,@album)),class: "form-select" ) %>
+                </div>
+              <%end%>
+            </div>
         <div class="">
           <%= f.submit "export", :class => "btn btn-large btn-primary" %>
         </div>

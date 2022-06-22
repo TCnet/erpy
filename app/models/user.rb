@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :kwords,dependent: :destroy
   has_many :xstockplans, dependent: :destroy
   has_many :etemplates, dependent: :destroy
+  has_many :amatemps, dependent: :destroy
   has_many :inoutplans, dependent: :destroy
   has_many :inventories, dependent: :destroy
   has_many :warehouses, dependent: :destroy

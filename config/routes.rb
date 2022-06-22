@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     resources :xstockplans
     resources :xstocks
     resources :etemplates
+    resources :amatemps
     resources :inoutplans
     resources :inoutstocks
     resources :inventories

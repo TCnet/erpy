@@ -33,5 +33,19 @@
 <%= f.label :dnote %>
 <%= f.text_area :dnote, class: 'form-control',placeholder: "Note" %>
 
-<%= f.submit yield(:button_text), class: "btn btn-primary" %>
-<% end %>
+<div class="row my-2 ">
+  <% @amatemps.each_with_index do |amatemp,num|%>
+    <% if(num%4==0) %>
+    </div>
+    <div class="row my-2 ">
+    <%end%>
+    <div class="col-3">
+      <%= label_tag amatemp.name %>
+      <% amatemp_array = amatemp.value.tr(' ',"|").split('|').map { |valu| [valu, valu] } %>
+        <% amatemp_array=  amatemp_array.insert(0,["请选择"," "]) %>
+          <%= select_tag("amatemp["+amatemp.name+"]", options_for_select(amatemp_array,getamavalue(amatemp,@album)),class: "form-select" ) %>
+        </div>
+      <%end%>
+    </div>
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  <% end %>

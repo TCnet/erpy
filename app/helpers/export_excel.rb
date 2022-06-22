@@ -50,6 +50,7 @@ module ExportExcel
       mainphotos = photos.where(sql,"%01.jpg%")
       otherphotos = photos.where(sql2,"%01.jpg%")
       waistsize = description_waist_size_for album.description
+      amatwihtas= album.amatwithas
 
 
 
@@ -271,6 +272,16 @@ module ExportExcel
              sheet1[num+c_cloum,t_num] = "CM"
           end
         end
+        
+       #export amatwithas
+        amatwihtas.each_with_index do |ata,atanum|
+          if(t_ob ==ata.amatemp.name)
+            #sheet1[1+c_cloum,t_num] = "Regular"
+            sheet1[num+c_cloum,t_num] = ata.value
+          end
+        end
+
+
 
 
 

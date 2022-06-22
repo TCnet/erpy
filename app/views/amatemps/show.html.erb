@@ -1,0 +1,15 @@
+<% provide(:title, "Show Amatemp") %>
+
+<div class="row">
+  <aside class="col-md-3 albums_menu">
+   <%= render 'shared/etemplate_menu' %>
+  </aside>
+  <div class="col-md-9">
+    <section class="etemplate_info">
+      <h5><%=@amatemp.name%></h5>
+      <textarea class="form-control" rows="6"
+                name="etitle" id="etitle"><%=@amatemp.title %></textarea>
+<span><%= link_to "edit",edit_amatemp_path(@amatemp) %> | <%= link_to "delete", @amatemp, method: :delete, data: { confirm: "You sure?"} %></span>
+</section>
+
+<div>
