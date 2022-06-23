@@ -20,17 +20,17 @@
 
           <% @amagroups.each do |ob| %>
             <tr>
-              <td class="col-sm-2">
+              <td >
                 <%= link_to ob.name, ob %>
 
               </td>
-              <td class="col-sm-6">
-                <p><%= (ob.amatemps.map{|mapap| mapap.name }).join(",") %></p>
+              <td >
+                <p style="width:500px;"><%= (ob.amatemps.map{|mapap| mapap.name }).join(",") %></p>
               </td>
-              <td class="col-sm-2">
+              <td >
                 <%= ob.isused %>
               </td>
-              <td class="col-sm-2">
+              <td >
                 <%= link_to "edit",edit_amagroup_path(ob) %>
                 ｜
                 <%= link_to "delete", ob, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
