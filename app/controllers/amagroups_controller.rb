@@ -1,5 +1,5 @@
 class AmagroupsController < ApplicationController
-
+  include ApplicationHelper
   def new
     @amagroup = Amagroup.new
     @amatemps=user_amatemps
@@ -9,6 +9,7 @@ class AmagroupsController < ApplicationController
     @amagroup = current_user.amagroups.build(amagroup_params)
     if @amagroup.save
       add_amagrouptwitha   @amagroup
+      set_current_used @amagroup,current_user.amagroups
       flash[:success] = "Amagroup created"
       redirect_to amagroups_path
     else
@@ -41,6 +42,7 @@ class AmagroupsController < ApplicationController
 
     if @amagroup.update(amagroup_params)
       add_amagrouptwitha   @amagroup
+      set_current_used @amagroup,current_user.amagroups
       flash[:success] = "amagroup updated"
       redirect_to amagroups_path
     else

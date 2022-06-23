@@ -8,19 +8,15 @@
 
       <div class="row templates">
         <table class="table">
-          <tr>
-            <td>
-              Name
-            </td>
-            <td>
-              包含属性
-            </td>
-            <td>IsUsed
-            </td>
-            <td>Options
-            </td>
-
-          </tr>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">包含属性</th>
+              <th scope="col">使用</th>
+              <th scope="col">edit</th>
+              <th scope="col">删除</th>
+            </tr>
+          </thead>
 
           <% @amagroups.each do |ob| %>
             <tr>
@@ -35,11 +31,10 @@
                 <%= ob.isused %>
               </td>
               <td>
-                <p>
-                  <%= link_to "edit",edit_amagroup_path(ob) %>
-                  |
-                  <%= link_to "delete", ob, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-                </p>
+                <%= link_to "edit",edit_amagroup_path(ob) %>
+              </td>
+              <td>
+                <%= link_to "delete", ob, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
               </td>
             </tr>
 

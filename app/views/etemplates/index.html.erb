@@ -8,17 +8,13 @@
 
       <div class="row templates">
         <table class="table">
-          <tr>
-            <td>
-              Name
-            </td>
-            <td>IsUsed
-            </td>
-            <td>Options
-            </td>
-
-          </tr>
-
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">当前使用</th>
+              <th scope="col">Options</th>
+            </tr>
+          </thead>
           <% @etemplates.each do |ob| %>
             <tr>
               <td>

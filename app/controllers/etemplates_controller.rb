@@ -1,5 +1,6 @@
 class EtemplatesController < ApplicationController
   include EtemplatesHelper
+  include ApplicationHelper
 
   def new
     @etemplate = Etemplate.new
@@ -8,6 +9,7 @@ class EtemplatesController < ApplicationController
   def create
     @etemplate = current_user.etemplates.build(etemplate_params)
     if @etemplate.save
+      set_current_used @etemplate,current_user.etemplates
       flash[:success] = "Template created"
       redirect_to etemplates_path
     else
@@ -34,6 +36,7 @@ class EtemplatesController < ApplicationController
   def update
     @etemplate = Etemplate.find(params[:id])
     if @etemplate.update(etemplate_params)
+      set_current_used @etemplate,current_user.etemplates
       flash[:success] = "Template updated"
       redirect_to etemplates_path
     else

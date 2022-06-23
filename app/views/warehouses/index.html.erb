@@ -9,10 +9,10 @@
         <h5>
           仓库列表</h5>
         <table class="table">
-          <th>名称</th>
-          <th>地址</th>
-          <th>当前库存</th>
-          <th>操作</th>
+          <th scope="col">名称</th>
+          <th scope="col">地址</th>
+          <th scope="col">当前库存</th>
+          <th scope="col">操作</th>
 
           <% @warehouses.each do |ob| %>
             <tr>
@@ -20,7 +20,7 @@
                 <%= ob.name %>
               </td>
               <td>
-                <%= ob.address %>
+                <%= ob.address %><span class="glyphicon glyphicon-ok "></span>
               </td>
               <td>
                 <%= raw ob.is_current ? '<span class="glyphicon glyphicon-ok "></span>' :'<span class="glyphicon glyphicon-remove "></span>'%>

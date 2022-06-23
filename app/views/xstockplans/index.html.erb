@@ -7,6 +7,12 @@
     <div class="col-md-9">
       <div class="row ">
         <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Options</th>
+            </tr>
+          </thead>
 
           <% @xstockplans.each do |ob| %>
             <tr>
@@ -18,9 +24,7 @@
                 <p>
                   <%= link_to "edit",edit_xstockplan_path(ob) %>
                   |
-                  <%= link_to "delete", ob, method: :delete, data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"} %>
+                  <%= link_to "delete", ob, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
                 </p>
               </td>
             </tr>

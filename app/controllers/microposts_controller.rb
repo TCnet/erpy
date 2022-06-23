@@ -12,7 +12,7 @@ class MicropostsController < ApplicationController
       redirect_to root_url
     else
       @feed_items = []
-      render 'static_pages/home'
+      render 'static_pages/home' , status: :unprocessable_entity
     end
 
   end
@@ -22,7 +22,7 @@ class MicropostsController < ApplicationController
       @micropost.image.purge
     end
     @micropost.destroy
-    
+
     flash[:success] = "Micropost deleted"
     redirect_to request.referrer || root_url
   end

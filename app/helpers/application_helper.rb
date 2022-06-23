@@ -11,5 +11,20 @@ module ApplicationHelper
     end
   end
 
+  # 只允许一个isused
+      def set_current_used(current_ag,themode)
+        obs =  themode
+        is_current= current_ag.isused
+        obs.each_with_index do |f,e|
+          if is_current
+            if f!=current_ag
+              f.isused = false
+              f.save
+            end
+
+          end
+        end
+      end
+
 
 end

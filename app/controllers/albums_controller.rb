@@ -210,7 +210,7 @@ class AlbumsController < ApplicationController
     end
 
     def user_amatemps
-      if(current_user.amagroups.count>0)
+      if(current_user.amagroups.where("isused").count>0)
         agroup = current_user.amagroups.where("isused").order(created_at: :desc).first
         ss=""
         agroup.amagroupwithas.each do |ag|

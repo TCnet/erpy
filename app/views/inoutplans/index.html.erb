@@ -10,11 +10,14 @@
         <h5>
           出入库记录</h5>
         <table class="table">
-          <th>Name</th>
-          <th>Actived</th>
-          <th>Date</th>
-          <th>Options</th>
-
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Actived</th>
+              <th scope="col">Date</th>
+                <th scope="col">Options</th>
+            </tr>
+          </thead>
           <% @inoutplans.each do |ob| %>
             <tr>
               <td>
