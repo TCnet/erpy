@@ -134,7 +134,7 @@ module SizeCode
       def description_other_size_for(typename,desize,is_in=false)
        #set size for description
          destr=""
-         waist_px = 0
+         waist_px = -1
          if !desize.empty?
            dearray = twoarray_for desize
            dellen = dearray[0].length
@@ -144,18 +144,21 @@ module SizeCode
                 break
               end
             end
-            dstr =  dearray[waist_px+1]
-            if(!dstr.empty?)
-              #wastr= dstr.split(' ')
-              dstr.each_with_index do |f, num|
-                thewaist = f.split('-')
-                destr+= thewaist[0]
-                #destr+= to_in(thewaist[0],is_in)
-                if(num<dstr.length-1)
-                  destr+=","
+            if(waist_px>-1) #找到数据 否则没有找到
+              dstr =  dearray[waist_px+1]
+              if(!dstr.empty?)
+                #wastr= dstr.split(' ')
+                dstr.each_with_index do |f, num|
+                  thewaist = f.split('-')
+                  destr+= thewaist[0]
+                  #destr+= to_in(thewaist[0],is_in)
+                  if(num<dstr.length-1)
+                    destr+=","
+                  end
                 end
               end
             end
+
 
          end
          return destr
