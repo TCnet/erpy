@@ -5,8 +5,8 @@ class AmatempsController < ApplicationController
   end
 
   def create
-    @Amatemp = current_user.amatemps.build(amatemp_params)
-    if @Amatemp.save
+    @amatemp = current_user.amatemps.build(amatemp_params)
+    if @amatemp.save
       flash[:success] = "Amatemp created"
       redirect_to amatemps_path
     else

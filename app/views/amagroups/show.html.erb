@@ -1,0 +1,16 @@
+<% provide(:title, "Show Amagroup") %>
+
+  <div class="row">
+    <aside class="col-md-3 albums_menu">
+      <%= render 'shared/etemplate_menu' %>
+    </aside>
+    <div class="col-md-9">
+      <section class="etemplate_info">
+        <h5><%=@amagroup.name%></h5>
+        <textarea class="form-control" rows="6" name="reamrk" id="reamrk"><%=@amagroup.remark %></textarea>
+        <span><%= link_to "edit",edit_amagroup_path(@amagroup) %>
+          |
+          <%= link_to "delete", @amagroup, method: :delete, data: { confirm: "You sure?"} %></span>
+      </section>
+
+      <div>

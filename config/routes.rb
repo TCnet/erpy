@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     resources :xstocks
     resources :etemplates
     resources :amatemps
+    resources :amagroups
     resources :inoutplans
     resources :inoutstocks
     resources :inventories
