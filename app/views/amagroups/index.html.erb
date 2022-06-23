@@ -11,10 +11,10 @@
           <thead>
             <tr>
               <th scope="col">Name</th>
-              <th scope="col">包含属性</th>
-              <th scope="col">使用</th>
-              <th scope="col">edit</th>
-              <th scope="col">删除</th>
+              <th scope="col" class="col-sm-8">包含属性</th>
+              <th scope="col" >当前使用</th>
+              <th scope="col">操作</th>
+
             </tr>
           </thead>
 
@@ -32,10 +32,11 @@
               </td>
               <td>
                 <%= link_to "edit",edit_amagroup_path(ob) %>
-              </td>
-              <td>
+                ｜
                 <%= link_to "delete", ob, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+
               </td>
+        
             </tr>
 
           <% end %>
