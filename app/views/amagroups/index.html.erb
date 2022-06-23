@@ -12,6 +12,9 @@
             <td>
               Name
             </td>
+            <td>
+              包含属性
+            </td>
             <td>IsUsed
             </td>
             <td>Options
@@ -26,9 +29,10 @@
 
               </td>
               <td>
-
+                <%= (ob.amatemps.map{|mapap| mapap.name }).join(",") %>
+              </td>
+              <td>
                 <%= ob.isused %>
-
               </td>
               <td>
                 <p>

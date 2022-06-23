@@ -12,6 +12,8 @@
             <td>
               Name
             </td>
+            <td>Group
+            </td>
             <td>IsUsed
             </td>
             <td>Options
@@ -23,7 +25,9 @@
             <tr>
               <td>
                 <%= link_to ob.name, ob %>
-
+              </td>
+              <td>
+                <%=(ob.amagroups.map {|mapag| mapag.name}).join(',') %>
               </td>
               <td>
 
