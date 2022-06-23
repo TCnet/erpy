@@ -10,10 +10,10 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col" class="col-sm-8">包含属性</th>
-              <th scope="col" >当前使用</th>
-              <th scope="col">操作</th>
+              <th scope="col" class="col-sm-2">Name</th>
+              <th scope="col" class="col-sm-6">包含属性</th>
+              <th scope="col" class="col-sm-2" >当前使用</th>
+              <th scope="col" class="col-sm-2">操作</th>
 
             </tr>
           </thead>
@@ -36,7 +36,7 @@
                 <%= link_to "delete", ob, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
 
               </td>
-        
+
             </tr>
 
           <% end %>

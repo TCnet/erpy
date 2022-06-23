@@ -1,4 +1,5 @@
 class AmagroupsController < ApplicationController
+  before_action :logged_in_user
   include ApplicationHelper
   def new
     @amagroup = Amagroup.new

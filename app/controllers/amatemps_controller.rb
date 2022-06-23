@@ -1,5 +1,5 @@
 class AmatempsController < ApplicationController
-
+  before_action :logged_in_user
   def new
     @amatemp = Amatemp.new
   end

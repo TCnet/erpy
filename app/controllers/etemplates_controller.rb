@@ -1,4 +1,5 @@
 class EtemplatesController < ApplicationController
+  before_action :logged_in_user
   include EtemplatesHelper
   include ApplicationHelper
 
