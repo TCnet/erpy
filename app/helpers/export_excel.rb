@@ -379,11 +379,11 @@ module ExportExcel
         end
         if(t_ob=="sale_from_date")
           #sheet1[1+c_cloum,t_num] =  -2.days.from_now.strftime('%Y-%m-%d')
-          sheet1[num+c_cloum,t_num] = -2.days.from_now.strftime('%Y-%m-%d')
+          sheet1[num+c_cloum,t_num] = -2.days.from_now.strftime('%Y-%m-%d').to_s
         end
         if(t_ob=="sale_end_date")
           #sheet1[1+c_cloum,t_num] =  770.days.from_now.strftime('%Y-%m-%d')
-          sheet1[num+c_cloum,t_num] = 770.days.from_now.strftime('%Y-%m-%d')
+          sheet1[num+c_cloum,t_num] = 770.days.from_now.strftime('%Y-%m-%d').to_s
         end
         if(t_ob=="import_designation")
           sheet1[1+c_cloum,t_num] =  "Imported"
