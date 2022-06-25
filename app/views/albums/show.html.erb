@@ -42,6 +42,10 @@
 
         <%= f.text_area :description, class: 'form-control',rows: 4,placeholder: "description size e.g;bust waist|70 78 can use enter instead | to separate " %>
         <%= f.text_area :dnote, class: 'form-control',rows: 4,placeholder: "Note" %>
+        <%= f.text_area :package, class: 'form-control',placeholder: "package size e.g;30 20 2 use enter instead | to separate default cm" %>
+        <%= f.text_area :weight, class: 'form-control',placeholder: "weight e.g;200 300 400 use space to separate default g" %>
+
+
         <div class="row my-2 ">
           <% @amatemps.each_with_index do |amatemp,num|%>
             <% if(num%4==0) %>

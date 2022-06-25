@@ -131,6 +131,7 @@ module AlbumsHelper
 
   end
 
+# stock or weight to two arry
   def stock_two_arry(codelength,csizelength,stock)
     ob = stock.tr("\n","|").split('|').map{|x| x.strip }
     if(ob.length>1)

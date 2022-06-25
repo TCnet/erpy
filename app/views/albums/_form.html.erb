@@ -32,6 +32,10 @@
 
 <%= f.label :dnote %>
 <%= f.text_area :dnote, class: 'form-control',placeholder: "Note" %>
+<%= f.label :package %>
+<%= f.text_area :package, class: 'form-control',placeholder: "30 20 2 use enter instead | to separate default cm" %>
+<%= f.label :weight %>
+<%= f.text_area :weight, class: 'form-control',placeholder: "200 300 400 use space to separate default g" %>
 
 <div class="row my-2 ">
   <% @amatemps.each_with_index do |amatemp,num|%>
@@ -40,7 +44,7 @@
     <div class="row my-2 ">
     <%end%>
     <div class="col-3">
-      
+
       <%= label_tag amatemp.name %>
       <% amatemp_array = amatemp.value.gsub(/ {2,}/,"|").tr("\t","|").tr("\n\r","|").split('|').map { |valu| [valu, valu] } %>
         <% amatemp_array=  amatemp_array.insert(0,["请选择"," "]) %>

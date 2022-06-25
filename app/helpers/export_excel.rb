@@ -79,6 +79,9 @@ module ExportExcel
       keywords_arry = album.keywords.tr("\n\r",",").split(',').map{|x| x.strip }.uniq.delete_if{|x| !x.to_s.present?}
       price_arry = album.price.nil?? " " : album.price.tr(" ",",").tr("|",",").split(',')
       stock_arry = album.stock.nil?? " " : stock_two_arry(code.length,csize.length,album.stock)
+      weight_arry = album.weight.blank?? " " : stock_two_arry(code.length,csize.length,album.weight)
+
+      package_arry = album.package.nil?? " " : album.package.tr(" ",",").tr("|",",").split(',')
       keywords_uniq = album.keywords.tr("\n\r"," ").split(' ').uniq.join(' ')[0,1000]
       #album_params[:keywords] =
       keywords_total = code.length * csize.length * 5+5
@@ -362,6 +365,12 @@ module ExportExcel
         if(t_ob=="quantity")
           sheet1[num+c_cloum,t_num]= stock_arry[n][m]
         end
+        if(t_ob=="package_weight"&&weight_arry.length>0)
+          sheet1[num+c_cloum,t_num]= weight_arry[n][m]
+        end
+        if(t_ob=="package_weight_unit_of_measure"&&weight_arry.length>0)
+          sheet1[num+c_cloum,t_num]= "GR"
+        end
 
         if(t_ob=="color_name")
           sheet1[num+c_cloum,t_num]= colorname
@@ -418,6 +427,54 @@ module ExportExcel
 
         end
 
+        #set package
+        if(package_arry.length==3)
+          if(t_ob=="package_length")
+           # sheet1[1+c_cloum,t_num] = price_arry[0].to_f.round(2)
+            sheet1[num+c_cloum,t_num] = package_arry[0].to_i
+          end
+          if(t_ob=="package_width")
+           # sheet1[1+c_cloum,t_num] = price_arry[0].to_f.round(2)
+            sheet1[num+c_cloum,t_num] = package_arry[1].to_i
+          end
+          if(t_ob=="package_height")
+           # sheet1[1+c_cloum,t_num] = price_arry[0].to_f.round(2)
+            sheet1[num+c_cloum,t_num] = package_arry[2].to_i
+          end
+
+
+          if(t_ob =="package_length_unit_of_measure")
+           if(is_in)
+              #sheet1[1+c_cloum,t_num] = ""
+              sheet1[num+c_cloum,t_num] = "IN"
+           else
+              #sheet1[1+c_cloum,t_num] = "Regular"
+              sheet1[num+c_cloum,t_num] = "CM"
+           end
+         end
+         if(t_ob =="package_width_unit_of_measure")
+          if(is_in)
+             #sheet1[1+c_cloum,t_num] = ""
+             sheet1[num+c_cloum,t_num] = "IN"
+          else
+             #sheet1[1+c_cloum,t_num] = "Regular"
+             sheet1[num+c_cloum,t_num] = "CM"
+          end
+        end
+        if(t_ob =="package_height_unit_of_measure")
+         if(is_in)
+            #sheet1[1+c_cloum,t_num] = ""
+            sheet1[num+c_cloum,t_num] = "IN"
+         else
+            #sheet1[1+c_cloum,t_num] = "Regular"
+            sheet1[num+c_cloum,t_num] = "CM"
+         end
+       end
+
+
+        end
+        #end setpackage
+
 
 
 
@@ -450,6 +507,7 @@ module ExportExcel
 
 
         end
+        #end set price
 
 
 
