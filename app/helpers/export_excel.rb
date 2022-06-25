@@ -365,10 +365,10 @@ module ExportExcel
         if(t_ob=="quantity")
           sheet1[num+c_cloum,t_num]= stock_arry[n][m]
         end
-        if(t_ob=="package_weight"&&weight_arry.length>0)
+        if(t_ob=="package_weight"&&!weight_arry.blank?)
           sheet1[num+c_cloum,t_num]= weight_arry[n][m]
         end
-        if(t_ob=="package_weight_unit_of_measure"&&weight_arry.length>0)
+        if(t_ob=="package_weight_unit_of_measure"&&!weight_arry.blank?)
           sheet1[num+c_cloum,t_num]= "GR"
         end
 
