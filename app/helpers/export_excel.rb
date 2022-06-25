@@ -79,7 +79,7 @@ module ExportExcel
       keywords_arry = album.keywords.tr("\n\r",",").split(',').map{|x| x.strip }.uniq.delete_if{|x| !x.to_s.present?}
       price_arry = album.price.nil?? " " : album.price.tr(" ",",").tr("|",",").split(',')
       stock_arry = album.stock.nil?? " " : stock_two_arry(code.length,csize.length,album.stock)
-      weight_arry = album.weight.blank?? " " : stock_two_arry(code.length,csize.length,album.weight)
+      weight_arry = album.weight.blank?? " " : stock_two_arry(code.length,csize.length,album.weight,"")
 
       package_arry = album.package.nil?? " " : album.package.tr(" ",",").tr("|",",").split(',')
       keywords_uniq = album.keywords.tr("\n\r"," ").split(' ').uniq.join(' ')[0,1000]
@@ -366,10 +366,13 @@ module ExportExcel
           sheet1[num+c_cloum,t_num]= stock_arry[n][m]
         end
         if(t_ob=="package_weight"&&!weight_arry.blank?)
+
           sheet1[num+c_cloum,t_num]= weight_arry[n][m]
         end
         if(t_ob=="package_weight_unit_of_measure"&&!weight_arry.blank?)
-          sheet1[num+c_cloum,t_num]= "GR"
+          if(!weight_arry[n][m].blank?)
+            sheet1[num+c_cloum,t_num]= "GR"
+          end
         end
 
         if(t_ob=="color_name")

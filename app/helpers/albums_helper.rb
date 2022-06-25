@@ -132,7 +132,8 @@ module AlbumsHelper
   end
 
 # stock or weight to two arry
-  def stock_two_arry(codelength,csizelength,stock)
+  def stock_two_arry(codelength,csizelength,stock,insert_str=0)
+    inse_str =insert_str
     ob = stock.tr("\n","|").split('|').map{|x| x.strip }
     if(ob.length>1)
 
@@ -141,30 +142,30 @@ module AlbumsHelper
       codelength.times do |n|
         if(ob.length>=codelength)
           mob= ob[n].split(' ')
-          result[n]= ob[n].split(' ').map{|item| item.to_i}
+          result[n]= ob[n].split(' ').map{|item| (inse_str==0) ? item.to_i :  item.to_s}
         else
           if(ob.length>=n+1)
-            result[n] = ob[n].split(' ').map{|item| item.to_i}
+            result[n] = ob[n].split(' ').map{|item| (inse_str==0) ? item.to_i :  item.to_s}
           else
-            result[n]=Array.new(csizelength,0)
+            result[n]=Array.new(csizelength,inse_str)
           end
         end
       end
 
       return result
     elsif(stock.empty?)
-      return Array.new(codelength, Array.new(csizelength, 0))
+      return Array.new(codelength, Array.new(csizelength, inse_str))
     elsif(stock.split(' ').length>1)
       s= stock.split(' ')
       if(s.length<csizelength)
-        csizelength-s.length.times do |f|
-         s << 0
+        (csizelength-s.length).times do |f|
+         s << inse_str
         end
       end
-      s= s.map{|item| item.to_i}
+      s= s.map{|item| (inse_str==0) ? item.to_i :  item.to_s }
       return Array.new(codelength,s)
     else
-      return Array.new(codelength, Array.new(csizelength, stock.to_i))
+      return Array.new(codelength, Array.new(csizelength,(inse_str==0) ? stock.to_i :  stock.to_s))
     end
 
   end
