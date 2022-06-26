@@ -314,6 +314,9 @@ module ExportExcel
         amatwihtas.each_with_index do |ata,atanum|
           if(t_ob ==ata.amatemp.name)
             #sheet1[1+c_cloum,t_num] = "Regular"
+            if(t_ob=="feed_product_type")
+              sheet1[1+c_cloum,t_num] = ata.value
+            end
             sheet1[num+c_cloum,t_num] = ata.value
           end
         end
