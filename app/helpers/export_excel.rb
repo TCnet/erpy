@@ -534,8 +534,15 @@ module ExportExcel
       if keywords_type == 3
         keywords_total = code.length * csize.length
         if(keywords_arry.length<keywords_total)
-          sheet1[1+c_cloum,t_num] =  keywords_arry.join(',')
+          sheet1[1+c_cloum,t_num] =  keywords_arry.join(' ')
+          code.each_with_index do |f,n|
+            csize.each_with_index do |e,m|
+              num = n*csize.length+m+1
+              sn = (num-1)*1
+              sheet1[num+1+c_cloum,t_num] = keywords_arry.join(' ')[0,230]
 
+            end
+          end
 
         elsif (keywords_arry.length > keywords_total)
           key_array= keywords_for keywords_total,keywords_arry
@@ -546,9 +553,7 @@ module ExportExcel
             csize.each_with_index do |e,m|
               num = n*csize.length+m+1
               sn = (num-1)*1
-
-              sheet1[num+1+c_cloum,t_num] = key_array[sn].join(',')[0,250]
-
+              sheet1[num+1+c_cloum,t_num] = key_array[sn].join(' ')[0,230]
 
             end
           end
