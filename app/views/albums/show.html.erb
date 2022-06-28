@@ -45,21 +45,7 @@
         <%= f.text_area :package, class: 'form-control',placeholder: "package size e.g;30 20 2 use enter instead | to separate default cm" %>
         <%= f.text_area :weight, class: 'form-control',placeholder: "weight e.g;200 300 400 use space to separate default g" %>
 
-
-        <div class="row my-2 ">
-          <% @amatemps.each_with_index do |amatemp,num|%>
-            <% if(num%4==0) %>
-            </div>
-            <div class="row my-2 ">
-            <%end%>
-            <div class="col-3">
-              <%= label_tag amatemp.name %>
-              <% amatemp_array = amatemp.value.tr(' ',"|").split('|').map { |valu| [valu, valu] } %>
-                <% amatemp_array=  amatemp_array.insert(0,["请选择"," "]) %>
-                  <%= select_tag("amatemp["+amatemp.name+"]", options_for_select(amatemp_array,getamavalue(amatemp,@album)),class: "form-select" ) %>
-                </div>
-              <%end%>
-            </div>
+        <%= render :partial => "amatempselect" %>
         <div class="">
           <%= f.submit "export", :class => "btn btn-large btn-primary" %>
         </div>
