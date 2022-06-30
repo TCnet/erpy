@@ -14,4 +14,44 @@
 
   </div>
   <div class="col"></div>
+
 </div>
+<div class="row my-3 ">
+  <div class="col"></div>
+  <div class="col-md-6">
+    <div class=" row g-2">
+      <textarea name="" id="txtkey" class="form-control" placeholder="关键词清除重复单词"></textarea>
+      <textarea name="" id="txtvalue" class="form-control"></textarea>
+      <label id="lbnum" class="text-danger"></label>
+
+    </div>
+
+  </div>
+  <div class="col"></div>
+
+</div>
+<script type="text/javascript">
+   function getv(arr)
+   {
+     let newsArr = [];
+     for (let i = 0; i < arr.length; i++) {
+       if (newsArr.indexOf(arr[i]) === -1) {
+         newsArr.push(arr[i]);
+       }
+     }
+     return newsArr;
+   }
+  $(document).ready(function () {
+
+    $("#txtkey").change(function () {
+      var value = $("#txtkey").val();
+
+      var arrd= value.split(' ');
+      var newa= getv(arrd).join(' ');
+      $("#txtvalue").val(newa);
+      $("#lbnum").text("字符数: " + newa.length);
+
+    });
+
+  })
+</script>

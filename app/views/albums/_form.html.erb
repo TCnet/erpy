@@ -24,6 +24,7 @@
 <%= f.text_field :fabric_type, class: 'form-control' ,placeholder:"95% cotton,5% spendex"%>
 <%= f.label :keywords %>
 <%= f.text_area :keywords, class: 'form-control',rows: 4,placeholder: "" %>
+<label id="lbkeywordnum" class="text-danger"></label>
 
 <%= f.label :dname %>
 <%= f.text_area :dname, class: 'form-control',rows: 4 ,placeholder:"Short name for description"%>
@@ -41,3 +42,18 @@
 
     <%= f.submit yield(:button_text), class: "btn btn-primary" %>
   <% end %>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      $("#album_keywords").change(function () {
+        var value = $("#album_keywords").val();
+        //var str=""
+        //str=value.replace(/b(w+)s+1b/gi, '$1');//=> "This sentence has double words."
+        //$("#txtvalue").val(str);
+        $("#lbkeywordnum").text("字符数: "+value.length);
+
+      });
+
+    })
+  </script>
