@@ -132,21 +132,19 @@ module ExportExcel
         #end sku
 
         # set size_map
-        if(t_ob=="size_map")
+        if(t_ob=="size_map"||t_ob=="size_name")
           sizenum = csize.length
           code.each_with_index do |f,index|
             if index ==1
             end
-
             csize.each_with_index do |m,j|
               rownum = index*sizenum +j +2
               sheet1[rownum+c_cloum,t_num] = size_map_for(m)
             end
-
           end
-
         end
         #end size_map
+
 
 
 
@@ -381,9 +379,10 @@ module ExportExcel
         if(t_ob=="color_name")
           sheet1[num+c_cloum,t_num]= colorname
         end
-        if(t_ob=="size_name")
-          sheet1[num+c_cloum,t_num]= sizename_new
-        end
+        # not to use ussize
+        # if(t_ob=="size_name")
+        #   sheet1[num+c_cloum,t_num]= sizename_new
+        # end
         if(t_ob=="item_name")
           sheet1[1+c_cloum,t_num] = fullname_for(brandname,fullname,"","")
           sheet1[num+c_cloum,t_num]=  fullname_for(brandname,fullname,colorname,sizename.tr("/","-").split(' ').join(' '))
