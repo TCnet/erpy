@@ -59,9 +59,9 @@ class AmagroupsController < ApplicationController
   #add add_amatwitha
    def add_amagrouptwitha agroup
      user_amatemps.each do |ama|
-       valueid = params.require(:amatemp)[ama.name]
+       valueid = params.require(:amatemp)[ama.id.to_s]
        amagroupwith= agroup.amagroupwithas.where("amatemp_id =? ",ama.id)
-       if valueid==ama.name
+       if valueid==ama.id.to_s
           if(amagroupwith.count==0)
             amagroupwith = Amagroupwitha.new
             amagroupwith.amagroup= agroup
