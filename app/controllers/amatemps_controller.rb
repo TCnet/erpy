@@ -49,6 +49,6 @@ class AmatempsController < ApplicationController
 
   private
     def amatemp_params
-      params.require(:amatemp).permit(:name, :value, :isused)
+      params.require(:amatemp).permit(:title, :name, :value, :isused)
     end
 end

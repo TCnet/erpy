@@ -1,6 +1,9 @@
 <%= form_with model: @amatemp,class: "row g-2" do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
-
+<div class="">
+  <%= f.label :title %>
+  <%= f.text_field :title, class: 'form-control' %>
+</div>
 <div class="">
   <%= f.label :name %>
   <%= f.text_field :name, class: 'form-control' %>
@@ -21,3 +24,28 @@
 </div>
 
 <% end %>
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+  $("#amatemp_title").change(function () {
+    var value = $("#amatemp_title").val();
+    var name= $("#amatemp_name").val();
+    var arrd= value.split('-');
+    if(arrd.length>0)
+    {
+
+      var newa= arrd[0].replace(/(\s*$)/g, "").split(' ').join('_').toLowerCase();
+      
+      if(name=="")
+      {
+        $("#amatemp_name").val(newa);
+
+      }
+    }
+
+
+  });
+
+})
+</script>
